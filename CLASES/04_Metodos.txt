@@ -1,0 +1,34 @@
+3-Marzo-2023
+
+------------ Métodos -------------
+
+Todos los tipos de datos en python son objetos.
+Y cada objeto tiene sus respectivos metodos.
+
+metodo => funcion
+
+¿Cómo ejecutar métodos?
+
+objeto.<metodo>()
+
+ejemplos: 
+       lista.append(100)   ==> Agrega un elemento a la lista
+       cadena.upper()      ==> Retorna cadena en mayuscula
+       diccionario.keys()  ==> Devuelve las claves
+
+
+------ Métodos de los strings ------------
+
+formateo:      capitalize(), upper(), lower()
+               title(), center(), strip()
+
+operaciones:   count(subcadena), 
+               replace(old, new), 
+               find(subcadena)
+
+verificacion:  isalpha(), isalnum()
+               isdigit(), isdecimal()
+
+indexing:      cadena[indice]
+
+slicing:       cadena[inicio:fin:salto]

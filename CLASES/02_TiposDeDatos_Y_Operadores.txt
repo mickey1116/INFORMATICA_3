@@ -1,0 +1,42 @@
+24-02-2023
+
+------ TIPOS DE DATOS -------
+
+Strings:     ""  '' "Hola mundo"  '123456'
+Enteros:     -99999999  0  10000000
+Flotantes:   100.09    -36.99    0.0
+Booleanos:   True False
+
+Listas:       []   [0, 1, 2]  ["uno", "dos", "tres"]
+Tuplas        ()   (0, 1, 1)  ("uno", "dos", "tres")
+Diccionarios  {}   {"hola": "hello", "mundo": "world"}
+Conjuntos     {}   {"A", "B", "C", "D"}
+
+------- OPERADORES --------
+
+Asignacion:   a = 3
+              b = "hola"
+              c = [1,2,3]
+
+Aritmeticos:  +, -, *
+              1/5  => 0.2    division
+              1//5 => 0      division entera
+              1%5  => 1      modulo de una division
+              2**3 => 8      Potencia
+              2**0.5 =>1.41  Raiz
+
+Logicos:     True and True => True
+             False or False => False 
+             not True  ==> False 
+
+
+Comparativos: "hola" == "hola "   =>   False
+              "hola" != "hola "   =>   True
+               3  >  5            =>   False
+               3  >= 3            =>   True
+              -10 <  0            =>   True
+              -10 <= 10           =>   False
+
+
+Pertenencia: 1 in [1,2,3]      => True
+             1 not in [1,2,3]  => False
