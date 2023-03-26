@@ -187,3 +187,7 @@ diccionario.clear()    #remueve los valores del diccionario
 print(diccionario)
 
 #help(diccionario.clear)
+
+lista=[1,2,3,4]
+tupla = (10,20,20,30)
+diccionario = {1:"uno", 2:"dos", 3:"tres"}
