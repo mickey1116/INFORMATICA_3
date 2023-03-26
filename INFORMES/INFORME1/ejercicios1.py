@@ -81,6 +81,48 @@ Almacene el resultado dentro de un diccionario llamado => diccionarioPagos
 las claves deben ser los nombres de los estudiantes (en strings)
 y los valores deben ser el dinero total que pagó cada uno al terminar la semana (2 decimales, use round())
 """
+diccionarioPagos={}
+estudiantes=[   ["Mariana" ,"Si","No","Si","No","No","No","No","Si","No","No"],
+                ["Sofia"   ,"Si","No","No","Si","Si","Si","No","No","Si","No"],
+                ["Camila"  ,"Si","No","Si","No","Si","No","No","No","No","No"],
+                ["Maria"   ,"Si","Si","Si","No","No","No","No","Si","No","No"],
+                ["Juan"    ,"Si","Si","Si","Si","No","Si","No","Si","No","No"],
+                ["Angie"   ,"Si","No","Si","No","No","Si","No","Si","No","No"],
+                ["Esteban" ,"Si","No","No","Si","Si","No","No","No","Si","No"],
+                ["Jose"    ,"Si","No","Si","Si","No","Si","No","Si","Si","No"],
+                ["Gisell"  ,"Si","Si","No","Si","No","Si","No","Si","No","No"],
+                ["Cristian","Si","Si","Si","No","No","Si","Si","Si","No","No"]
+            ]
+estudiantesPorDia=[]
+m=1
+numerodeEstudiantes=0
+while m<=10:
+    for estudiante in estudiantes:
+        if estudiante[m]=="Si":
+            numerodeEstudiantes=numerodeEstudiantes+1
+    estudiantesPorDia.append(numerodeEstudiantes)
+    numerodeEstudiantes=0
+    m=m+1
+
+totalaPagar=[]
+m=1
+pago=0
+for estudiante in estudiantes:
+    while m<=10:
+        if estudiante[m]=="Si":
+            if estudiantesPorDia[m]!=0:
+                pago=15000/estudiantesPorDia[m]+pago
+            elif estudiantesPorDia[m]==0:
+                pago=10000/10+pago
+        m=m+1
+    m=0
+    totalaPagar.append(round(pago,2))
+    pago=0
+    
+n=0
+for estudiante in estudiantes:
+    diccionarioPagos[estudiante[0]]=totalaPagar[n]
+    n=n+1
 
 
 #------------------------ EJERCICIO 3 ----------------------------------------------------------------------------------
@@ -275,23 +317,22 @@ def ventasEmpresa(registros):
 """
 registros = ["P009-21Unidades", "B005-19Unidades", "B001-19Unidades", "P009-31Unidades", "B005-22Unidades", "W307-15Unidades", "A011-31Unidades", "P019-18Unidades", "A011-20Unidades", "R001-20Unidades", "P019-19Unidades", "A001-12Unidades", "A125-20Unidades", "R001-31Unidades", "Z052-52Unidades", "W307-31Unidades", "Z025-42Unidades", "Z052-10Unidades", "Z278-30Unidades", "Z025-24Unidades", "Z278-21Unidades", "A001-31unidades", "A032-52Unidades", "B001-29Unidades", "A125-15Unidades", "A032-22Unidades" ]
 
-data=[      
-        ["A001", 31000],
-        ["A011", 25000],
-        ["A032", 43000],
-        ["A125", 55000],
-        ["B001", 10000],
-        ["B005", 20000],
-        ["P009", 30000],
-        ["P019", 49000],
-        ["R001", 60000],
-        ["W307", 90000],
-        ["Z052", 35000],
-        ["Z025", 27000],
-        ["Z278", 65000]
-        ]
-
 def ventasEmpresa(registros):
+    data=[      
+            ["A001", 31000],
+            ["A011", 25000],
+            ["A032", 43000],
+            ["A125", 55000],
+            ["B001", 10000],
+            ["B005", 20000],
+            ["P009", 30000],
+            ["P019", 49000],
+            ["R001", 60000],
+            ["W307", 90000],
+            ["Z052", 35000],
+            ["Z025", 27000],
+            ["Z278", 65000]
+            ]
     codigos=[]
     unidades=[]
     i=0
