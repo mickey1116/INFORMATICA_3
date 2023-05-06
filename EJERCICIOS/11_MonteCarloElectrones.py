@@ -6,7 +6,7 @@ r = 1
 T = 0.01
 q = 1
 elec_Circunferenciales = 5
-elec_Internos = 5
+elec_Internos = 8
 
 def crear_Estado_Inicial():
     angulo = 6.28/(elec_Circunferenciales)
@@ -45,9 +45,9 @@ def calcular_energia_total():
     combinaciones = list(combinations(r, 2))
     for r_ in combinaciones:
         r1, r2 = r_[0], r_[1]
-        print(r1,"vs", r2, "distancia =>", distancia(r1,r2))
+        #print(r1,"vs", r2, "distancia =>", distancia(r1,r2))
         sumEnergias += k*q*q / distancia(r1,r2)
-    print("final",sumEnergias)
+    #print("final",sumEnergias)
     return sumEnergias
 
 
@@ -64,21 +64,58 @@ def metropolis(ran_int_position):  #cambio aleatorio de la posicion de un electr
     x_in.append(x_change)
     y_in.append(y_change)
     calcular_energia_total()
-    dibujar_sistema(x_out,y_out,x_in,y_in)
 
-def paso_montecarlo():
+            
+
+
+
+def paso_montecarlo(T):
+    for i in range(elec_Internos):
+        ran_int_position=np.random.randint(0,len(r))
+        while ran_int_position < elec_Circunferenciales:
+            ran_int_position=np.random.randint(0,len(r))
+        else: pass
+        metropolis(ran_int_position)
+    #dibujar_sistema(x_out,y_out,x_in,y_in)
+
+amount_mcs = 10000
+T_high=5
+T_low=0.01
+step=-0.1
+
+def random_configuration():
     ran_int_position=np.random.randint(0,len(r))
     while ran_int_position < elec_Circunferenciales:
         ran_int_position=np.random.randint(0,len(r))
     else: pass
-    metropolis(ran_int_position)
 
 
+temps = np.arange(T_high, T_low, step)
+energies = np.zeros(shape=(len(temps), amount_mcs))
+magnetizations = np.zeros(shape=(len(temps), amount_mcs))
+random_configuration()
 
 
+for ind_T, T in enumerate(temps):
+    for i in range(amount_mcs):
+        paso_montecarlo(T)
+        energies[ind_T, i] = calcular_energia_total()
+
+
+tau = amount_mcs // 2
+energy_mean = np.mean(energies[:, tau:], axis=1)
+magnetization_mean = abs(np.mean(magnetizations[:, tau:], axis=1))
+
+plt.figure()
+plt.plot(temps, energy_mean, label="Energy")
+plt.legend()
+plt.xlabel(r"$T$")
+plt.ylabel(r"$\left<E\right>$")
+plt.grid()
+plt.show()
 
 print(x_out)
 print(y_out)
 print(x_in)
 print(y_in)
-paso_montecarlo()
+dibujar_sistema(x_out,y_out,x_in,y_in)
