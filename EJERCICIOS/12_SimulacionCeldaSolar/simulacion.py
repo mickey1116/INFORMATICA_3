@@ -44,3 +44,67 @@ print("densidad de potencia: ", pot_celda)
 
 
 # =======================Simulacion variando el voltaje====================
+celdas=10
+cells=[]
+for u in range(celdas):
+    cells.append(u)
+
+def metropolis(ran_int_position):
+    sumJ=0
+    for i in range(vol_high):
+        sumJ=simulation(i)
+        sumJ== sumJ+sumJ
+        return sumJ
+
+def Montecarlo_step(voltage):
+    for i in range(len(cells)):
+        ran_int_position=np.random.randint(0,len(cells))
+        metropolis(ran_int_position)
+
+amount_mcs = 1000
+vol_high=0.5375
+vol_low=0
+step= -(vol_high-vol_low)/100
+
+temps = np.arange(vol_high, vol_low, step)
+current = np.zeros(shape=(len(temps), amount_mcs))
+potential = np.zeros(shape=(len(temps), amount_mcs))
+
+for ind_v, voltage in enumerate(temps):
+    for i in range(amount_mcs):
+        current[ind_v, i] = simulation(voltage)
+        potential[ind_v, i] = simulation(voltage)*voltage
+
+print(temps)
+tau = amount_mcs // 2
+current_mean = np.mean(current[:, tau:], axis=1)
+potential_mean = np.mean(potential[:, tau:], axis=1)
+
+plt.figure()
+plt.plot(temps, current_mean, label="Current")
+plt.legend()
+plt.xlabel(r"$Voltios$")
+plt.ylabel(r"$\left<J\right>$")
+plt.grid()
+plt.show()
+
+plt.figure()
+plt.plot(temps, potential_mean, label="Current")
+plt.legend()
+plt.xlabel(r"$Voltios$")
+plt.ylabel(r"$\left<J\right>$")
+plt.grid()
+plt.show()
+
+V_mpp=0.4251
+P_mpp=0.0159
+J_mpp=P_mpp/V_mpp
+J_sc=0.0424
+def fill_Factor():
+    return (J_mpp*V_mpp)/(vol_high*J_sc)
+
+def efficience():
+    return (J_sc*vol_high*fill_Factor())/(P_mpp)
+
+print(fill_Factor())
+print(efficience())

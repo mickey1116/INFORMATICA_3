@@ -5,8 +5,8 @@ k=1
 r = 1
 T = 0.01
 q = 1
-elec_Circunferenciales = 5
-elec_Internos = 8
+elec_Circunferenciales = 3
+elec_Internos = 2
 
 def crear_Estado_Inicial():
     angulo = 6.28/(elec_Circunferenciales)
@@ -78,7 +78,7 @@ def paso_montecarlo(T):
         metropolis(ran_int_position)
     #dibujar_sistema(x_out,y_out,x_in,y_in)
 
-amount_mcs = 10000
+amount_mcs = 1000
 T_high=5
 T_low=0.01
 step=-0.1
@@ -118,4 +118,5 @@ print(x_out)
 print(y_out)
 print(x_in)
 print(y_in)
+print(temps)
 dibujar_sistema(x_out,y_out,x_in,y_in)
