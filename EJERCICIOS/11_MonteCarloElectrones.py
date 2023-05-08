@@ -65,9 +65,6 @@ def metropolis(ran_int_position):  #cambio aleatorio de la posicion de un electr
     y_in.append(y_change)
     calcular_energia_total()
 
-            
-
-
 
 def paso_montecarlo(T):
     for i in range(elec_Internos):
@@ -92,7 +89,6 @@ def random_configuration():
 
 temps = np.arange(T_high, T_low, step)
 energies = np.zeros(shape=(len(temps), amount_mcs))
-magnetizations = np.zeros(shape=(len(temps), amount_mcs))
 random_configuration()
 
 
@@ -104,7 +100,6 @@ for ind_T, T in enumerate(temps):
 
 tau = amount_mcs // 2
 energy_mean = np.mean(energies[:, tau:], axis=1)
-magnetization_mean = abs(np.mean(magnetizations[:, tau:], axis=1))
 
 plt.figure()
 plt.plot(temps, energy_mean, label="Energy")

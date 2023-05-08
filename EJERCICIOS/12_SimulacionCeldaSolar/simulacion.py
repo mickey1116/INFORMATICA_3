@@ -49,17 +49,6 @@ cells=[]
 for u in range(celdas):
     cells.append(u)
 
-def metropolis(ran_int_position):
-    sumJ=0
-    for i in range(vol_high):
-        sumJ=simulation(i)
-        sumJ== sumJ+sumJ
-        return sumJ
-
-def Montecarlo_step(voltage):
-    for i in range(len(cells)):
-        ran_int_position=np.random.randint(0,len(cells))
-        metropolis(ran_int_position)
 
 amount_mcs = 1000
 vol_high=0.5375
@@ -70,10 +59,11 @@ temps = np.arange(vol_high, vol_low, step)
 current = np.zeros(shape=(len(temps), amount_mcs))
 potential = np.zeros(shape=(len(temps), amount_mcs))
 
-for ind_v, voltage in enumerate(temps):
-    for i in range(amount_mcs):
-        current[ind_v, i] = simulation(voltage)
-        potential[ind_v, i] = simulation(voltage)*voltage
+for a in range(len(cells)):
+    for ind_v, voltage in enumerate(temps):
+        for i in range(amount_mcs):
+            current[ind_v, i] = simulation(voltage)
+            potential[ind_v, i] = simulation(voltage)*voltage
 
 print(temps)
 tau = amount_mcs // 2
