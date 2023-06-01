@@ -169,6 +169,7 @@ list_HF=Herat_Failure()
 list_A=Arrhytmias()
 list_AH=Arterial_Hypertension()
 
+
 for i in range(0,10):
     Probs=[]
     Probs.append(float(list_CHD[i]))
@@ -181,7 +182,7 @@ datos_y=pd.DataFrame(data= Probs_Patient)
 datos_y.head()
 indices=[]
 for i in range(0,10):
-    indices.append(i+1)
+    indices.append(i)
 columnas=["edad","género","presión sanguinea","colesterol","nivel de azucar","indice de masa corporal","enfermedad hereditaria", "fuma","vida sedentaria", "enfermedad cardiaca previa"]
 datos=pd.DataFrame(index=indices,columns=columnas,data=data)
 
@@ -220,8 +221,8 @@ class Red(nn.Module):
         super(Red, self).__init__()
         self.linear1=nn.Linear(n_entradas,15)
         self.linear2=nn.Linear(15,10)
-        self.linear3=nn.Linear(10,4)
-        self.linear4=nn.Linear(4,2)
+        self.linear3=nn.Linear(10,5)
+        self.linear4=nn.Linear(5,4)
 
 
     def forward(self, inputs):
@@ -233,7 +234,7 @@ class Red(nn.Module):
 
 #### entrenamiento
 lr=0.001
-epochs=100
+epochs=1000
 estatus_print=100
 
 model=Red(n_entradas=n_entradas)
@@ -246,6 +247,7 @@ print("entrenando modelo")
 
 for epoch in range(1, epochs+1):
     y_pred=model(t_x_train)
+    y_pred= y_pred.unsqueeze(1)
     loss= loss_fn(input=y_pred, target=t_y_train)           #Error con lad dimensiones de los tensores
     loss.backward()
     optimizer.step()
