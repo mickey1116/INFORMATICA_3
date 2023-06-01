@@ -7,8 +7,9 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
 
+pacientes=100
 data=[]
-for user in range(0,10):
+for user in range(0,pacientes):
     user=[]
     age=np.random.randint(1,90)
     gender=["Hombre", "Mujer"]
@@ -170,7 +171,7 @@ list_A=Arrhytmias()
 list_AH=Arterial_Hypertension()
 
 
-for i in range(0,10):
+for i in range(0,pacientes):
     Probs=[]
     Probs.append(float(list_CHD[i]))
     Probs.append(float(list_HF[i]))
@@ -181,7 +182,7 @@ for i in range(0,10):
 datos_y=pd.DataFrame(data= Probs_Patient)
 datos_y.head()
 indices=[]
-for i in range(0,10):
+for i in range(0,pacientes):
     indices.append(i)
 columnas=["edad","género","presión sanguinea","colesterol","nivel de azucar","indice de masa corporal","enfermedad hereditaria", "fuma","vida sedentaria", "enfermedad cardiaca previa"]
 datos=pd.DataFrame(index=indices,columns=columnas,data=data)
@@ -211,7 +212,7 @@ t_y_test= torch.from_numpy(y_test.values).float().to("cpu")
 t_y_train=t_y_train[:,None]
 t_y_test=t_y_test[:,None]
 
-print(t_y_train.shape)
+print(t_y_test.shape)
 print(t_x_train.shape)
 
 ### estructura de red neuronal
@@ -247,7 +248,7 @@ print("entrenando modelo")
 
 for epoch in range(1, epochs+1):
     y_pred=model(t_x_train)
-    y_pred= y_pred.unsqueeze(1)
+    y_pred= y_pred.unsqueeze(1)                             #corrige el tamaño del tensor
     loss= loss_fn(input=y_pred, target=t_y_train)           #Error con lad dimensiones de los tensores
     loss.backward()
     optimizer.step()
@@ -273,3 +274,20 @@ for epoch in range(1, epochs+1):
 
 
 print("accuracy final: {}".format(round(accuracy.item(),4)))
+
+plt.figure(figsize=(10,10))
+plt.plot(historico["epoch"], historico["loss"], label="loss")
+plt.title("loss", fontsize=25)
+plt.xlabel("Epoch",fontsize=12)
+plt.ylabel("Loss",fontsize=12)
+plt.grid()
+plt.show()
+
+
+plt.figure(figsize=(10,10))
+plt.plot(historico["epoch"], historico["Accuracy"], label="accuracy")
+plt.title("Accuracy", fontsize=25)
+plt.xlabel("Epoch",fontsize=12)
+plt.ylabel("Accuracy",fontsize=12)
+plt.grid()
+plt.show()
