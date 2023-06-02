@@ -291,3 +291,7 @@ plt.xlabel("Epoch",fontsize=12)
 plt.ylabel("Accuracy",fontsize=12)
 plt.grid()
 plt.show()
+
+prediccion=model(t_x_test[0])
+print(t_x_test[0])
+print(prediccion)
